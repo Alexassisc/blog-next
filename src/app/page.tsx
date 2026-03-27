@@ -1,20 +1,8 @@
-import { Post } from '@/domain/posts/types';
-
-async function getPosts(): Promise<Post[]> {
-  const res = await fetch(
-    'https://blog-strapi-api-bw1p.onrender.com/api/posts?populate=*',
-    { next: { revalidate: 60 } },
-  );
-
-  const json = await res.json();
-
-  return json.data ? json.data : json;
-}
-
-import Posts from './posts';
+import HomePage from '@/containers/HomePage';
+import { getAllPosts } from '@/data/posts/get-all-posts';
 
 export default async function Home() {
-  const posts = await getPosts();
+  const posts = await getAllPosts();
 
-  return <Posts posts={posts} />;
+  return <HomePage posts={posts}></HomePage>;
 }
