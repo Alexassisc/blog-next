@@ -2,17 +2,18 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 
-* {margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
-
-html, body {
-  width: 100%;
+body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  box-sizing: border-box;
+
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 `;

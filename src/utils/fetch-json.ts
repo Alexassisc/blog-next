@@ -4,7 +4,7 @@ export const fetchJson = async <T>(url: string): Promise<T> => {
   });
 
   if (!res.ok) {
-    throw new Error(`Erro ao buscas dados de ${url}`);
+    throw new Error(`Erro ao buscar dados de ${url}`);
   }
 
   return await res.json();

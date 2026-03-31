@@ -2,6 +2,7 @@ import { StyledProvider } from '@/providers/StyledProvider';
 import { Header } from '@/components/Header';
 import { GlobalStyles } from '@/styles/global-styles';
 import { MainContainer } from '@/components/MainContainer';
+import { Footer } from '@/components/Footer';
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
           <GlobalStyles />
           <Header />
           <MainContainer>{children}</MainContainer>
+          <Footer />
         </StyledProvider>
       </body>
     </html>
