@@ -1,4 +1,7 @@
 import { StyledProvider } from '@/providers/StyledProvider';
+import { Header } from '@/components/Header';
+import { GlobalStyles } from '@/styles/global-styles';
+import { MainContainer } from '@/components/MainContainer';
 
 export default function RootLayout({
   children,
@@ -8,7 +11,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <StyledProvider>{children}</StyledProvider>
+        <StyledProvider>
+          <GlobalStyles />
+          <Header />
+          <MainContainer>{children}</MainContainer>
+        </StyledProvider>
       </body>
     </html>
   );
