@@ -1,14 +1,13 @@
-import { HtmlContent } from '@/components/htmlcontent';
+// src/app/post/[slug]/page.tsx
 import { getAllPosts } from '@/data/posts/get-all-posts';
 import { getPostBySlug } from '@/data/posts/get-post-by-slug';
+import { PostContainer } from '@/containers/HomePage/Post';
+import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-
-  return posts.map((post: Post) => ({
-    slug: post.slug,
-  }));
+  return posts.map((post: Post) => ({ slug: post.slug }));
 }
 
 export default async function DynamicPost({
@@ -18,24 +17,9 @@ export default async function DynamicPost({
 }) {
   const { slug } = await params;
   const posts = await getPostBySlug(slug);
-
   const post = Array.isArray(posts) ? posts[0] : posts;
 
-  if (!post) return <p>Post não encontrado.</p>;
+  if (!post) notFound();
 
-  return (
-    <article>
-      <h1>{post.title}</h1>
-
-      {post.cover?.url && (
-        <img
-          src={post.cover.url}
-          alt={post.title}
-          style={{ width: '100%', borderRadius: '8px', marginBottom: '2rem' }}
-        />
-      )}
-
-      <HtmlContent content={post.content} />
-    </article>
-  );
+  return <PostContainer post={post} />;
 }

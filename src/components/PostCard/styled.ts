@@ -23,10 +23,9 @@ export const Cover = styled.img`
     opacity 0.8s,
     transform 0.8s;
 
-  /* Quando o MOUSE estiver no Container pai, mude o Cover */
   ${Container}:hover & {
     opacity: 0.8;
-    transform: scale(1.1); /* O zoom que você queria */
+    transform: scale(1.1);
   }
 `;
 

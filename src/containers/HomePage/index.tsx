@@ -12,7 +12,6 @@ export interface HomePageProps {
 export default function HomePage({ posts, total }: HomePageProps) {
   return (
     <Styled.Container>
-      {/* O span agora ficará no topo graças ao ajuste que fizemos no Grid */}
       <span>
         Mostrando {posts.length} de {total} posts
       </span>
