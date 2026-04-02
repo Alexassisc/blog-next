@@ -1,4 +1,5 @@
 import HomePage from '@/containers/HomePage';
+import { countAllPosts } from '@/data/posts/count-all-posts';
 import { getAllPosts } from '@/data/posts/get-all-posts';
 import { Metadata } from 'next';
 
@@ -8,7 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const posts = await getAllPosts();
+  const [posts, total] = await Promise.all([getAllPosts(), countAllPosts()]);
 
-  return <HomePage posts={posts}></HomePage>;
+  return (
+    <>
+      <HomePage posts={posts} total={total} />
+    </>
+  );
 }

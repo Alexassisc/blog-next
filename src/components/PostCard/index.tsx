@@ -1,20 +1,26 @@
+import Link from 'next/link'; // Importe o Link para a navegação funcionar
 import * as Styled from './styled';
 
-export const PostCard = ({
-  title,
-  cover,
-}: {
+export type PostCardProps = {
   title: string;
   cover?: string;
-}) => {
+  slug: string;
+};
+
+export const PostCard = ({ title, cover, slug }: PostCardProps) => {
   return (
     <Styled.Container>
-      {cover && (
-        <Styled.ImageContainer>
-          <img src={cover} alt={title} />
-        </Styled.ImageContainer>
-      )}
-      <Styled.Title>{title}</Styled.Title>
+      <Link
+        href={`/post/${slug}`}
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        {cover && (
+          <Styled.ImageContainer>
+            <Styled.Cover src={cover} alt={title} />
+          </Styled.ImageContainer>
+        )}
+        <Styled.Title>{title}</Styled.Title>
+      </Link>
     </Styled.Container>
   );
 };

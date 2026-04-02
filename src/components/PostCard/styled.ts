@@ -5,41 +5,34 @@ export const Container = styled.article`
   flex-direction: column;
   gap: 1rem;
   cursor: pointer;
-
-  img {
-    max-width: 100%;
-    border-radius: 8px;
-  }
 `;
 
 export const ImageContainer = styled.div`
   aspect-ratio: 16/9;
   overflow: hidden;
   border-radius: 8px;
-  img {
-    width: 100%;
-    height: 100%;
+  background-color: #eee;
+`;
 
-    object-fit: cover;
+export const Cover = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    opacity 0.8s,
+    transform 0.8s;
 
-    object-position: center;
-
-    transition: opacity 0.8s;
-  }
-
-  ${Container}:hover & img {
+  /* Quando o MOUSE estiver no Container pai, mude o Cover */
+  ${Container}:hover & {
     opacity: 0.8;
+    transform: scale(1.1); /* O zoom que você queria */
   }
 `;
 
 export const Title = styled.h2`
-  margin-top: 0rem;
+  margin: 0;
   font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.4;
   color: #333;
-
-  @media screen and (max-width: 600px) {
-    font-size: 1.1rem;
-  }
 `;
