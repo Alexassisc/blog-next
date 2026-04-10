@@ -1,7 +1,7 @@
 // src/app/post/[slug]/page.tsx
 import { getAllPosts } from '@/data/posts/get-all-posts';
 import { getPostBySlug } from '@/data/posts/get-post-by-slug';
-import { PostContainer } from '@/containers/HomePage/Post';
+import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
 

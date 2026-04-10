@@ -63,9 +63,22 @@ export type Post = {
   updatedAt: string;
   publishedAt: string;
 
-  cover: Cover | null;
+  cover?: Cover | null;
+
+  author?: Author;
+  category?: Category;
 };
 
 export type PostsResponse = {
   data: Post[];
+};
+
+export type Author = {
+  id: PostID;
+  name: string;
+};
+
+export type Category = {
+  id: PostID;
+  name: string;
 };

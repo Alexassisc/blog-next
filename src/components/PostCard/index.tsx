@@ -1,4 +1,4 @@
-import Link from 'next/link'; // Importe o Link para a navegação funcionar
+import Link from 'next/link';
 import * as Styled from './styled';
 
 export type PostCardProps = {

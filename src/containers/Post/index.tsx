@@ -4,6 +4,8 @@ import { Post } from '@/domain/posts/types';
 import { HtmlContent } from '@/components/HtmlContent';
 import * as Styled from './styled';
 import { Heading } from '@/components/Heading';
+import { PostCover } from '@/components/PostCover';
+import { PostDetails } from '@/components/PostDetails';
 
 export type PostContainerProps = {
   post: Post;
@@ -17,10 +19,14 @@ export const PostContainer = ({ post }: PostContainerProps) => {
       </Styled.Header>
 
       {post.cover?.url && (
-        <Styled.CoverContainer>
-          <Styled.CoverImage src={post.cover.url} alt={post.title} />
-        </Styled.CoverContainer>
+        <PostCover coverUrl={post.cover.url} alt={post.title} />
       )}
+
+      <PostDetails
+        author={post.author?.name || 'Autor desconhecido'}
+        category={post.category?.name || 'Sem categoria'}
+        date={post.createdAt}
+      />
 
       <HtmlContent content={post.content} />
     </Styled.Container>
