@@ -11,7 +11,7 @@ export type CommentsProps = {
 
 export const Comments = ({ id, slug, title }: CommentsProps) => {
   const disqusConfig = {
-    url: `http://vcap.me:3000/post/${slug}`,
+    url: `https://blog-next-6kc5.onrender.com/post/${slug}`,
     identifier: id,
     title: title,
     language: 'pt_BR',
