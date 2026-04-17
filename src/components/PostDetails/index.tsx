@@ -11,7 +11,7 @@ export const PostDetails = ({ author, category, date }: PostDetailsProps) => {
   return (
     <Styled.Container>
       Publicado por <strong>{author}</strong>
-      {' em '}
+      em
       <PostDate date={date} />
       <span className="separator"> | </span>
       Categoria: <strong>{category}</strong>

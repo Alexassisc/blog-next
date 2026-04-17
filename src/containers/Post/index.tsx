@@ -6,6 +6,7 @@ import * as Styled from './styled';
 import { Heading } from '@/components/Heading';
 import { PostCover } from '@/components/PostCover';
 import { PostDetails } from '@/components/PostDetails';
+import { Comments } from '@/Comments';
 
 export type PostContainerProps = {
   post: Post;
@@ -29,6 +30,7 @@ export const PostContainer = ({ post }: PostContainerProps) => {
       />
 
       <HtmlContent content={post.content} />
+      <Comments id={post.id.toString()} slug={post.slug} title={post.title} />
     </Styled.Container>
   );
 };

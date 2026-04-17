@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.article`
   ${({ theme }) => css`
-    max-width: 80rem; /* 800px */
+    max-width: 80rem;
     margin: 0 auto;
     padding: ${theme.spacings.medium};
 
@@ -27,3 +27,5 @@ export const Header = styled.header`
     }
   `}
 `;
+
+
