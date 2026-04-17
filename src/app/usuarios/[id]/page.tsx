@@ -1,4 +1,6 @@
-export function generateStaticParams() {}
+export function generateStaticParams() {
+  return [{ id: '1' }];
+}
 
 export default async function Usuario({
   params,
