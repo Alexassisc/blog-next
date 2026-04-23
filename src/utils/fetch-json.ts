@@ -1,11 +1,17 @@
 export const fetchJson = async <T>(url: string): Promise<T> => {
-  const res = await fetch(url, {
-    next: { revalidate: 60 },
-  });
+  try {
+    const res = await fetch(url, {
+      cache: 'no-store',
+    });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao buscar dados de ${url}`);
+    if (!res.ok) {
+      throw new Error(`Erro ${res.status} ao buscar dados de ${url}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error(`Falha crítica ao buscar dados: ${url}`, error);
+
+    return { data: [] } as unknown as T;
   }
-
-  return await res.json();
 };
