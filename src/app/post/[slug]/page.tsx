@@ -20,8 +20,13 @@ export async function generateMetadata(props: {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post: Post) => ({ slug: post.slug }));
+  try {
+    const posts = await getAllPosts();
+    return posts.map((post: Post) => ({ slug: post.slug }));
+  } catch (error) {
+    console.error('Erro ao gerar rotas estáticas:', error);
+    return [];
+  }
 }
 
 export default async function DynamicPost({
