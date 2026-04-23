@@ -74,11 +74,27 @@ export type PostsResponse = {
 };
 
 export type Author = {
-  id: PostID;
-  name: string;
+  data: {
+    id: PostID;
+    documentId: string;
+    attributes: {
+      name: string;
+      createdAt: string;
+      updatedAt: string;
+      publishedAt: string;
+    };
+  };
 };
 
 export type Category = {
-  id: PostID;
-  name: string;
+  data: {
+    id: PostID;
+    documentId: string;
+    attributes: {
+      name: string;
+      createdAt: string;
+      updatedAt: string;
+      publishedAt: string;
+    };
+  };
 };

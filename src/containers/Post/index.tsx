@@ -8,7 +8,6 @@ import { PostCover } from '@/components/PostCover';
 import { PostDetails } from '@/components/PostDetails';
 import { Comments } from '@/Comments';
 
-
 export type PostContainerProps = {
   post: Post;
 };
@@ -25,8 +24,9 @@ export const PostContainer = ({ post }: PostContainerProps) => {
       )}
 
       <PostDetails
-        author={post.author?.name || 'Autor desconhecido'}
-        category={post.category?.name || 'Sem categoria'}
+
+        author={post.author?.data?.attributes?.name || 'Autor desconhecido'}
+        category={post.category?.data?.attributes?.name || 'Sem categoria'}
         date={post.createdAt}
       />
 
