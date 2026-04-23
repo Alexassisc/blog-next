@@ -24,10 +24,9 @@ export const PostContainer = ({ post }: PostContainerProps) => {
       )}
 
       <PostDetails
-
-        author={post.author?.data?.attributes?.name || 'Autor desconhecido'}
-        category={post.category?.data?.attributes?.name || 'Sem categoria'}
-        date={post.createdAt}
+        author={post.author?.name || 'Autor desconhecido'}
+        category={post.category?.name || 'Sem categoria'}
+        date={post.publishedAt}
       />
 
       <HtmlContent content={post.content} />
