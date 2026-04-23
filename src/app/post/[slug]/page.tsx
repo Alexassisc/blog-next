@@ -5,13 +5,11 @@ import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
 
-
-export async function generateMetadata({
-  params,
-}: {
+export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
+}) {
+  const params = await props.params;
+  const slug = params.slug;
   const posts = await getPostBySlug(slug);
   const post = Array.isArray(posts) ? posts[0] : posts;
 
@@ -20,8 +18,6 @@ export async function generateMetadata({
     description: 'Leia este conteúdo incrível no meu blog',
   };
 }
-  
-
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
