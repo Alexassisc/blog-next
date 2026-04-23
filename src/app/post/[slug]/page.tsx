@@ -5,6 +5,8 @@ import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }) {
