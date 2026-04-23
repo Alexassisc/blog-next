@@ -5,30 +5,26 @@ import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
 
-export const dynamic = 'force-dynamic';
-
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }) {
-  const params = await props.params;
-  const slug = params.slug;
+  const { slug } = await props.params;
   const posts = await getPostBySlug(slug);
   const post = Array.isArray(posts) ? posts[0] : posts;
 
   return {
     title: post?.title || 'Post não encontrado',
-    description: 'Leia este conteúdo incrível no meu blog',
+
+    description: post?.title
+      ? `Leia mais sobre: ${post.title}`
+      : 'Bem-vindo ao meu blog.',
   };
 }
 
 export async function generateStaticParams() {
-  try {
-    const posts = await getAllPosts();
-    return posts.map((post: Post) => ({ slug: post.slug }));
-  } catch (error) {
-    console.error('Erro ao gerar rotas estáticas:', error);
-    return [];
-  }
+  const posts = await getAllPosts();
+
+  return posts.map((post: Post) => ({ slug: post.slug }));
 }
 
 export default async function DynamicPost({

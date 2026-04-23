@@ -1,10 +1,10 @@
+// src/app/page.tsx
 import HomePage from '@/containers/HomePage';
 import { countAllPosts } from '@/data/posts/count-all-posts';
 import { getAllPosts } from '@/data/posts/get-all-posts';
 import { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -14,9 +14,5 @@ export const metadata: Metadata = {
 export default async function Home() {
   const [posts, total] = await Promise.all([getAllPosts(), countAllPosts()]);
 
-  return (
-    <>
-      <HomePage posts={posts} total={total} />
-    </>
-  );
+  return <HomePage posts={posts} total={total} />;
 }

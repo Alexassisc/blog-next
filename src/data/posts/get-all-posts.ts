@@ -7,14 +7,16 @@ export async function getAllPosts(): Promise<Post[]> {
 
   try {
     console.log(`Buscando posts em: ${url}`);
-
     const json = await fetchJson<{ data: Post[] }>(url);
 
+    if (json && json.data) {
+      return json.data;
+    }
 
-    return json.data || [];
+    throw new Error('Dados vazios retornados pela API');
   } catch (error) {
-
     console.error('Erro ao buscar posts:', error);
+
     return [];
   }
 }
