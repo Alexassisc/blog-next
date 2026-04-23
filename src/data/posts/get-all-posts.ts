@@ -6,17 +6,15 @@ export async function getAllPosts(): Promise<Post[]> {
   const url = `${POST_URL}?populate=*&sort[0]=id:desc&pagination[pageSize]=30`;
 
   try {
-    console.log(`Buscando posts em: ${url}`);
     const json = await fetchJson<{ data: Post[] }>(url);
 
-    if (json && json.data) {
+    if (json && Array.isArray(json.data)) {
       return json.data;
     }
 
-    throw new Error('Dados vazios retornados pela API');
+    return [];
   } catch (error) {
     console.error('Erro ao buscar posts:', error);
-
     return [];
   }
 }
