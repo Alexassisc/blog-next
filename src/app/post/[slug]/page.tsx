@@ -5,6 +5,24 @@ import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
 
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const posts = await getPostBySlug(slug);
+  const post = Array.isArray(posts) ? posts[0] : posts;
+
+  return {
+    title: post?.title || 'Post não encontrado',
+    description: 'Leia este conteúdo incrível no meu blog',
+  };
+}
+  
+
+
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post: Post) => ({ slug: post.slug }));

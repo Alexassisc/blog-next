@@ -8,6 +8,7 @@ import { PostCover } from '@/components/PostCover';
 import { PostDetails } from '@/components/PostDetails';
 import { Comments } from '@/Comments';
 
+
 export type PostContainerProps = {
   post: Post;
 };

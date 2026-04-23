@@ -4,6 +4,7 @@ import { Post } from '@/domain/posts/types';
 import * as Styled from './styles';
 import { PostCard } from '@/components/PostCard';
 
+
 export interface HomePageProps {
   posts: Post[];
   total: number;
