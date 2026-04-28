@@ -17,9 +17,8 @@ export async function generateMetadata(props: {
       ? `${post.title} - ${SITE_NAME}`
       : `Post não encontrado - ${SITE_NAME}`,
 
-    description: post?.title
-      ? removeHtml(post.content).substring(0, 150) +
-        `Leia mais sobre: ${post.title}`
+    description: post
+      ? `${removeHtml(post.content).substring(0, 120)}... Leia mais sobre: ${post.title}`
       : 'Bem-vindo ao meu blog.',
   };
 }
