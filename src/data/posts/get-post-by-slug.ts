@@ -1,13 +1,13 @@
+import { cache } from 'react';
 import { POST_URL } from '@/config/app-config';
 import { Post } from '@/domain/posts/types';
 import { fetchJson } from '@/utils/fetch-json';
 
-export async function getPostBySlug(slug: string | string[]): Promise<Post[]> {
-  const slugString = Array.isArray(slug) ? slug[0] : slug;
+export const getPostBySlug = cache(
+  async (slug: string): Promise<Post | null> => {
+    const url = `${POST_URL}?filters[slug][$eq]=${slug}&populate=*`;
+    const json = await fetchJson<{ data: Post[] }>(url);
 
-  const url = `${POST_URL}?filters[slug][$eq]=${slugString}&populate=*`;
-
-  const json = await fetchJson<{ data: Post[] }>(url);
-
-  return json.data;
-}
+    return Array.isArray(json.data) ? json.data[0] : null;
+  },
+);

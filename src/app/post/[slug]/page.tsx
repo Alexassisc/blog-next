@@ -1,22 +1,25 @@
-// src/app/post/[slug]/page.tsx
 import { getAllPosts } from '@/data/posts/get-all-posts';
 import { getPostBySlug } from '@/data/posts/get-post-by-slug';
 import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
+import { SITE_NAME } from '@/config/app-config';
+import { removeHtml } from '@/utils/remove-html';
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const posts = await getPostBySlug(slug);
-  const post = Array.isArray(posts) ? posts[0] : posts;
+  const post = await getPostBySlug(slug);
 
   return {
-    title: post?.title || 'Post não encontrado',
+    title: post?.title
+      ? `${post.title} - ${SITE_NAME}`
+      : `Post não encontrado - ${SITE_NAME}`,
 
     description: post?.title
-      ? `Leia mais sobre: ${post.title}`
+      ? removeHtml(post.content).substring(0, 150) +
+        `Leia mais sobre: ${post.title}`
       : 'Bem-vindo ao meu blog.',
   };
 }
@@ -33,8 +36,7 @@ export default async function DynamicPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const posts = await getPostBySlug(slug);
-  const post = Array.isArray(posts) ? posts[0] : posts;
+  const post = await getPostBySlug(slug);
 
   if (!post) notFound();
 
