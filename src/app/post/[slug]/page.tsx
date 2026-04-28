@@ -18,7 +18,14 @@ export async function generateMetadata(props: {
       : `Post não encontrado - ${SITE_NAME}`,
 
     description: post
-      ? `${removeHtml(post.content).substring(0, 120)}... Leia mais sobre: ${post.title}`
+      ? (() => {
+          const cleanContent = removeHtml(post.content)
+            .replace(/#/g, '')
+            .trim();
+
+          const shortDescription = cleanContent.substring(0, 120);
+          return `${shortDescription}... Leia mais sobre: ${post.title}`;
+        })()
       : 'Bem-vindo ao meu blog.',
   };
 }
