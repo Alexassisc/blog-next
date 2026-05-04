@@ -82,5 +82,6 @@ export type Author = {
 export type Category = {
   id: PostID;
   documentId: string;
-  name: string; 
+  name: string;
+  slug: string;
 };

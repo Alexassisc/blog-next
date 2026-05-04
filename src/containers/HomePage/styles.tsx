@@ -14,6 +14,19 @@ export const Container = styled.section`
     color: #888;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
   }
+`;
+
+export const Category = styled.div`
+  text-align: center;
+
+  font-family: 'Times New Roman', Times, serif;
+
+  grid-column: 1 / -1;
+  font-size: ${({ theme }) => theme?.font?.sizes?.large || '2rem'};
+  padding: ${({ theme }) => theme?.spacings?.medium || '2rem'} 0;
+  color: ${({ theme }) => theme?.colors?.text || '#000000'};
+
+  font-weight: bold;
 `;

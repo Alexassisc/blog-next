@@ -32,9 +32,24 @@ export async function generateMetadata(props: {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  try {
+    const posts = await getAllPosts();
 
-  return posts.map((post: Post) => ({ slug: post.slug }));
+    if (!Array.isArray(posts)) return [];
+
+    return posts
+      .filter((post: Post) => {
+        const hasSlug =
+          post.slug && typeof post.slug === 'string' && post.slug.trim() !== '';
+        return hasSlug && post.slug !== 'undefined';
+      })
+      .map((post: Post) => ({
+        slug: post.slug,
+      }));
+  } catch (error) {
+    console.error('Erro ao gerar parâmetros estáticos:', error);
+    return [];
+  }
 }
 
 export default async function DynamicPost({
@@ -43,9 +58,16 @@ export default async function DynamicPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  if (!slug || slug === 'undefined' || slug === 'null') {
+    notFound();
+  }
+
   const post = await getPostBySlug(slug);
 
-  if (!post) notFound();
+  if (!post) {
+    notFound();
+  }
 
   return <PostContainer post={post} />;
 }

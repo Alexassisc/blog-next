@@ -26,6 +26,7 @@ export const PostContainer = ({ post }: PostContainerProps) => {
       <PostDetails
         author={post.author?.name || 'Autor desconhecido'}
         category={post.category?.name || 'Sem categoria'}
+        categorySlug={post.category?.slug || ''}
         date={post.publishedAt}
       />
 
