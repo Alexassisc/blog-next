@@ -6,6 +6,8 @@ import { Post } from '@/domain/posts/types';
 import { SITE_NAME } from '@/config/app-config';
 import { removeHtml } from '@/utils/remove-html';
 
+export const dynamicParams = true;
+
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }) {
