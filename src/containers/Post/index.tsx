@@ -6,7 +6,7 @@ import * as Styled from './styled';
 import { Heading } from '@/components/Heading';
 import { PostCover } from '@/components/PostCover';
 import { PostDetails } from '@/components/PostDetails';
-import { Comments } from '@/Comments';
+import { Comments } from '@/components/Comments';
 
 export type PostContainerProps = {
   post: Post;
