@@ -7,6 +7,7 @@ import { SITE_NAME } from '@/config/app-config';
 import { removeHtml } from '@/utils/remove-html';
 
 export const dynamicParams = true;
+export const revalidate = 60;
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
