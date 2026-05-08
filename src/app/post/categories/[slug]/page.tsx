@@ -1,9 +1,10 @@
 import { PostCard } from '@/components/PostCard';
-import { POST_URL } from '@/config/app-config';
+import { POST_URL, SITE_NAME } from '@/config/app-config';
 import { getAllPosts } from '@/data/posts/get-all-posts';
 import { PostsResponse } from '@/domain/posts/types';
 import { fetchJson } from '@/utils/fetch-json';
 import * as Styled from '@/containers/HomePage/styles';
+import { Metadata } from 'next';
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -17,6 +18,25 @@ export async function generateStaticParams() {
   return uniqueSlugs.map((slug) => ({
     slug: slug,
   }));
+}
+
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await props.params;
+
+  const url = `${POST_URL}?filters[category][slug][$eq]=${slug}&pagination[limit]=1&populate=*`;
+  const response = await fetchJson<PostsResponse>(url);
+
+  const categoryName =
+    response.data.length > 0
+      ? response.data[0].category?.name
+      : slug.charAt(0).toUpperCase() + slug.slice(1);
+
+  return {
+    title: `Categoria: ${categoryName} - ${SITE_NAME}`,
+    description: `Veja todas as publicações sobre ${categoryName}`,
+  };
 }
 
 export default async function CategoryPage(props: {
@@ -33,10 +53,7 @@ export default async function CategoryPage(props: {
 
   return (
     <Styled.Container>
-      
-      <Styled.Category>
-        Categoria: {categoryName}
-      </Styled.Category>
+      <Styled.Category>Categoria: {categoryName}</Styled.Category>
 
       {posts.length > 0 ? (
         <>
