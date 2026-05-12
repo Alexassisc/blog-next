@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.h1`
-  color: black;
-  margin: 1.5rem 0;
-  line-height: 1.2;
-  font-weight: 800;
-  text-align: left;
+  ${({ theme }) => css`
+    color: ${theme.colors.primary};
+    margin: 1.5rem 0;
+    line-height: 1.2;
+    font-weight: 800;
+    text-align: left;
+  `}
 `;

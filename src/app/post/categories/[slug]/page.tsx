@@ -1,3 +1,5 @@
+
+
 import { PostCard } from '@/components/PostCard';
 import { POST_URL, SITE_NAME } from '@/config/app-config';
 import { getAllPosts } from '@/data/posts/get-all-posts';

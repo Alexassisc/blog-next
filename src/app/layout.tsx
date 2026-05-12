@@ -1,6 +1,5 @@
 import { StyledProvider } from '@/providers/StyledProvider';
 import { Header } from '@/components/Header';
-import { GlobalStyles } from '@/styles/global-styles';
 import { MainContainer } from '@/components/MainContainer';
 import { Footer } from '@/components/Footer';
 
@@ -13,7 +12,6 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body>
         <StyledProvider>
-          <GlobalStyles />
           <Header />
           <MainContainer>{children}</MainContainer>
           <Footer />
