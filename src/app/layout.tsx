@@ -13,7 +13,7 @@ export default function RootLayout({
       <body>
         <StyledProvider>
           <Header />
-          <MainContainer>{children}</MainContainer>
+          <MainContainer>{children} </MainContainer>
           <Footer />
         </StyledProvider>
       </body>

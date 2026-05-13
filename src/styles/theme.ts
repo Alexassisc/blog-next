@@ -25,4 +25,8 @@ export const theme = {
       superLarge: '5rem',
     },
   },
+
+  sizes: {
+    content: '120rem',
+  },
 };

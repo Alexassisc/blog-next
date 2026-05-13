@@ -1,10 +1,15 @@
-import styled from 'styled-components';
+'use client';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  width: 100%;
+  ${({ theme }) => css`
+    max-width: ${theme.sizes.content};
 
-  min-height: 80vh;
+    margin: 0 auto;
+
+    padding: ${theme.spacings.medium};
+
+    width: 100%;
+    min-height: 80vh;
+  `}
 `;

@@ -3,18 +3,24 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.footer`
   ${({ theme }) => css`
-    background-color: ${theme?.colors?.white || '#fafafa'};
-    color: ${theme?.colors?.text || '#333'};
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.text};
 
-    padding: 1.5rem 0;
+    padding: ${theme.spacings.large};
+
     text-align: center;
-    font-size: 0%.85rem;
+
+    font-size: ${theme.font.sizes.small};
+
     width: 100%;
-    border-top: 1px solid #eee;
+
+    border-top: 0.1rem solid ${theme.colors.lightGray};
 
     p {
       margin: 0;
       font-weight: 500;
+
+      color: inherit;
     }
   `}
 `;
