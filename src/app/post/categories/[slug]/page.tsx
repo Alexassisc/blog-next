@@ -1,5 +1,3 @@
-
-
 import { PostCard } from '@/components/PostCard';
 import { POST_URL, SITE_NAME } from '@/config/app-config';
 import { getAllPosts } from '@/data/posts/get-all-posts';
@@ -63,7 +61,7 @@ export default async function CategoryPage(props: {
             <PostCard
               key={post.id}
               title={post.title}
-              slug={post.slug}
+              id={post.id}
               cover={post.cover?.formats?.small?.url || post.cover?.url || ''}
             />
           ))}

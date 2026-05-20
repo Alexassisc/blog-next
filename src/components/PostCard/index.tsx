@@ -4,14 +4,14 @@ import * as Styled from './styled';
 export type PostCardProps = {
   title: string;
   cover?: string;
-  slug: string;
+  id: number | string;
 };
 
-export const PostCard = ({ title, cover, slug }: PostCardProps) => {
+export const PostCard = ({ title, cover, id }: PostCardProps) => {
   return (
     <Styled.Container>
       <Link
-        href={`/post/${slug}`}
+        href={`/post/${id}`}
         style={{ textDecoration: 'none', color: 'inherit' }}
       >
         {cover && (

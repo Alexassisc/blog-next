@@ -9,8 +9,8 @@ interface CountResponse {
   };
 }
 
-export async function countAllPosts(): Promise<number> {
-  const url = `${POST_URL}?pagination[pageSize]=1`;
+export async function countAllPosts(query = ''): Promise<number> {
+  const url = `${POST_URL}?pagination[pageSize]=1${query}`;
   const json = await fetchJson<CountResponse>(url);
 
   return json.meta.pagination.total;

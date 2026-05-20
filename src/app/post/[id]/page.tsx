@@ -1,5 +1,5 @@
 import { getAllPosts } from '@/data/posts/get-all-posts';
-import { getPostBySlug } from '@/data/posts/get-post-by-slug';
+import { getPostById } from '@/data/posts/get-post-by-id'; // Puxando a nova função
 import { PostContainer } from '@/containers/Post';
 import { notFound } from 'next/navigation';
 import { Post } from '@/domain/posts/types';
@@ -9,11 +9,13 @@ import { removeHtml } from '@/utils/remove-html';
 export const dynamicParams = true;
 export const revalidate = 600;
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await props.params;
-  const post = await getPostBySlug(slug);
+type PageProps = {
+  params: Promise<{ id: string }>;
+};
+
+export async function generateMetadata(props: PageProps) {
+  const { id } = await props.params;
+  const post = await getPostById(id);
 
   return {
     title: post?.title
@@ -40,33 +42,23 @@ export async function generateStaticParams() {
 
     if (!Array.isArray(posts)) return [];
 
-    return posts
-      .filter((post: Post) => {
-        const hasSlug =
-          post.slug && typeof post.slug === 'string' && post.slug.trim() !== '';
-        return hasSlug && post.slug !== 'undefined';
-      })
-      .map((post: Post) => ({
-        slug: post.slug,
-      }));
+    return posts.map((post: Post) => ({
+      id: String(post.id),
+    }));
   } catch (error) {
     console.error('Erro ao gerar parâmetros estáticos:', error);
     return [];
   }
 }
 
-export default async function DynamicPost({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+export default async function DynamicPost({ params }: PageProps) {
+  const { id } = await params;
 
-  if (!slug || slug === 'undefined' || slug === 'null') {
+  if (!id || id === 'undefined' || id === 'null') {
     notFound();
   }
 
-  const post = await getPostBySlug(slug);
+  const post = await getPostById(id);
 
   if (!post) {
     notFound();

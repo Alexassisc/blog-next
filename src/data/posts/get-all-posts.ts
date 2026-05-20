@@ -2,8 +2,15 @@ import { POST_URL } from '@/config/app-config';
 import { Post } from '@/domain/posts/types';
 import { fetchJson } from '@/utils/fetch-json';
 
-export async function getAllPosts(): Promise<Post[]> {
-  const url = `${POST_URL}?populate[author][populate]=*&populate[category][populate]=*&populate[cover][populate]=*&sort[0]=id:desc&pagination[pageSize]=30`;
+export async function getAllPosts(query = ''): Promise<Post[]> {
+  let url = `${POST_URL}?populate[author][populate]=*&populate[category][populate]=*&populate[cover][populate]=*`;
+
+  if (query) {
+    url += `&${query}`;
+  } else {
+    url += `&sort[0]=id:desc&pagination[pageSize]=30`;
+  }
+
   try {
     const json = await fetchJson<{ data: Post[] }>(url);
 

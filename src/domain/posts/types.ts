@@ -85,3 +85,13 @@ export type Category = {
   name: string;
   slug: string;
 };
+
+export type PostData = Post;
+
+export type PaginationData = {
+  nextPage: number;
+  numberOfPosts: number;
+  postsPerPage: number;
+  previousPage: number;
+  category?: string;
+};

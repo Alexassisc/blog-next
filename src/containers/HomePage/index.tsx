@@ -1,20 +1,29 @@
 'use client';
 
-import { Post } from '@/domain/posts/types';
+import { PaginationData, Post } from '@/domain/posts/types';
 import * as Styled from './styles';
 import { PostCard } from '@/components/PostCard';
 
-
 export interface HomePageProps {
   posts: Post[];
-  total: number;
+  total?: number;
+  category?: string;
+  pagination?: PaginationData;
 }
 
-export default function HomePage({ posts, total }: HomePageProps) {
+export default function HomePage({
+  posts,
+  total,
+  category,
+  pagination,
+}: HomePageProps) {
+  const totalPosts = total ?? pagination?.numberOfPosts ?? 0;
+
   return (
     <Styled.Container>
       <span>
-        Mostrando {posts.length} de {total} posts
+        {category ? `Categoria: ${category} | ` : ''}
+        Mostrando {posts.length} de {totalPosts} posts
       </span>
 
       {posts.map((post) => {
@@ -25,7 +34,7 @@ export default function HomePage({ posts, total }: HomePageProps) {
             key={post.id}
             title={post.title}
             cover={imageUrl}
-            slug={post.slug}
+            id={post.id}
           />
         );
       })}
