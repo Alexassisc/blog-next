@@ -22,9 +22,13 @@ export const PostDetails = ({
       <PostDate date={date} />
       <span className="separator"> | </span>
       Categoria:{' '}
-      <Link href={`/post/categories/${categorySlug}`}>
-        <strong> {category}</strong>
-      </Link>
+      {categorySlug ? (
+        <Link href={`/post/page/1/${categorySlug}`}>
+          <strong>{category}</strong>
+        </Link>
+      ) : (
+        <strong>{category}</strong>
+      )}
     </Styled.Container>
   );
 };

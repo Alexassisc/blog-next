@@ -32,3 +32,8 @@ export const Category = styled.div`
 
   font-weight: bold;
 `;
+
+export const PaginationContainer = styled.div`
+  grid-column: 1 / -1;
+  width: 100%;
+`;
