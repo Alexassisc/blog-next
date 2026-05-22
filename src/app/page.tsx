@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   const page = 1;
   const category = '';
-  const postsPerPage = 6;
+  const postsPerPage = 2;
 
   const nextPage = page + 1;
   const previousPage = page - 1;

@@ -34,7 +34,7 @@ export default async function Page({ params }: PageProps) {
   const page = Number(resolveParams.params[0] || 1);
   const category = resolveParams.params[1] || '';
 
-  const postsPerPage = 6;
+  const postsPerPage = 2;
   const nextPage = page + 1;
   const previousPage = page - 1;
 
